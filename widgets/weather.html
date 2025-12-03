@@ -1,47 +1,45 @@
 <div class="weather-widget">
-<!-- Místo pro název města -->
-<div class="weather-city">Načítám...</div>
-<!-- Místo pro teplotu -->
-<div class="weather-temp" id="weather-temp">--°C</div>
-<!-- Místo pro popis (jasno, prší...) -->
-<div class="weather-desc" id="weather-desc">Načítám...</div>
+    <!-- Místo pro název města -->
+    <div class="weather-city">Načítám...</div>
+    <!-- Místo pro teplotu -->
+    <div class="weather-temp" id="weather-temp">--°C</div>
+    <!-- Místo pro popis (jasno, prší...) -->
+    <div class="weather-desc" id="weather-desc">Načítám...</div>
 </div>
-<script> 
-(function () { 
-const tempEl = document.getElementById('weather-temp'); 
-const descEl = document.getElementById('weather-desc'); 
-const cityEl = document.querySelector('.weather-city'); 
-// Souřadnice pro Prahu 
-const lat = 50.0755; 
-const long = 14.4378; 
-// ... sem pište další kód JS 
-})(); 
-// URL pro API s našimi souřadnicemi 
-const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true`; 
-fetch(weatherUrl) 
-.then(response => response.json()) 
-.then(data => { 
-const temp = data.current_weather.temperature; 
-const code = data.current_weather.weathercode; 
-tempEl.textContent = `${temp}°C`; 
-descEl.textContent = getWeatherDescription(code); // Funkce pro převod kódu 
-}); 
-// URL pro BigDataCloud API (Reverse Geocoding) 
-const geoUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}&localityLanguage=cs`; 
-fetch(geoUrl) 
-.then(response => response.json()) 
-.then(data => { 
-// API může vrátit město v různých polích, zkusíme postupně 
-cityEl.textContent = data.city || data.locality || 'Neznámé místo'; 
-}); 
-function getWeatherDescription(code) { 
-if (code === 0) return 'Jasno'; 
-if (code >= 1 && code <= 3) return 'Polojasno'; 
-if (code >= 45 && code <= 48) return 'Mlha'; 
-if (code >= 51 && code <= 67) return 'Déšť'; 
-if (code >= 71 && code <= 77) return 'Sníh'; 
-if (code >= 95) return 'Bouřka'; 
-return 'Neznámé'; 
-} 
-</script>
+<script>
+    (function () {
+        const tempEl = document.getElementById('weather-temp');
+        const descEl = document.getElementById('weather-desc');
+        const cityEl = document.querySelector('.weather-city');
+        // Souřadnice pro Uherské Hradiště
+        const lat = 49.07;
+        const long = 17.46;
+        // URL pro API s našimi souřadnicemi 
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true`;
+        fetch(weatherUrl)
+            .then(response => response.json())
+            .then(data => {
+                const temp = data.current_weather.temperature;
+                const code = data.current_weather.weathercode;
+                tempEl.textContent = `${temp}°C`;
+                descEl.textContent = getWeatherDescription(code);
+            });
 
+        // URL pro BigDataCloud API (Reverse Geocoding) 
+        const geoUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}&localityLanguage=cs`;
+        fetch(geoUrl)
+            .then(response => response.json())
+            .then(data => {
+                cityEl.textContent = data.city || data.locality || 'Neznámé místo';
+            });
+        function getWeatherDescription(code) {
+            if (code === 0) return 'Jasno';
+            if (code >= 1 && code <= 3) return 'Polojasno';
+            if (code >= 45 && code <= 48) return 'Mlha';
+            if (code >= 51 && code <= 67) return 'Déšť';
+            if (code >= 71 && code <= 77) return 'Sníh';
+            if (code >= 95) return 'Bouřka';
+            return 'Neznámé';
+        }
+    })();
+</script>
