@@ -20,7 +20,7 @@ body {
 }
 
 .widget {
-  background: rgb(0, 0, 0);
+  background: white;
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
@@ -31,17 +31,4 @@ body {
 .widget:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(170, 170, 170, 0.15);
-}
-
-/* Grid systém pro šířku widgetů */
-.widget.full {
-  grid-column: 1 / -1; /* Celá šířka - 12 sloupců */
-}
-
-.widget.half {
-  grid-column: span 6; /* Polovina šířky - 6 sloupců */
-}
-
-.widget.third {
-  grid-column: span 3; /* Polovina šířky - 6 sloupců */
 }
