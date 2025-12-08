@@ -3,18 +3,18 @@
     <div class="input-group">
         <input type="text" x-model="newTodo" @keyup.enter="add()" placeholder="Nový úkol...">
         <button @click="add()">+</button>
-        <ul>
-            <template x-for="todo in todos" :key="todo.id">
-                <li :class="{ 'completed': todo.completed }">
-                    <div class="todo-item-content">
-                        <input type="checkbox" x-model="todo.completed">
-                        <span x-text="todo.text"></span>
-                    </div>
-                    <button @click="remove(todo.id)" class="delete-btn">&times;</button>
-                </li>
-            </template>
-        </ul>
     </div>
+    <ul>
+        <template x-for="todo in todos" :key="todo.id">
+            <li :class="{ 'completed': todo.completed }">
+                <div class="todo-item-content">
+                    <input type="checkbox" x-model="todo.completed">
+                    <span x-text="todo.text"></span>
+                </div>
+                <button @click="remove(todo.id)" class="delete-btn">&times;</button>
+            </li>
+        </template>
+    </ul>
     <script>
         function todoWidget() {
             return {
@@ -41,7 +41,6 @@
         }
     </script>
     <style>
-        .input-group,
         .todo-widget li,
         .todo-item-content {
             display: flex;
@@ -52,6 +51,7 @@
         .todo-widget ul {
             list-style: none;
             padding: 0;
+            display: block;
         }
 
         .completed span {
@@ -60,5 +60,11 @@
 
         .todo-widget button {
             cursor: pointer;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+
         }
     </style>
