@@ -1,214 +1,173 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
 <title>Přelomové vesmírné mise</title>
 
 <style>
-  *{ box-sizing:border-box; }
+*{box-sizing:border-box;}
 
-  body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#0b0f1a;
-    color:#fff;
-    overflow-x:hidden;
-  }
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0b0f1a;
+  color:white;
+  overflow-x:hidden;
+}
 
-  /* ===== VÍCE RAKET ===== */
-  .rocket{
-    position:fixed;
-    bottom:-120px;
-    font-size:44px;
-    opacity:.85;
-    z-index:10;
-    animation-name: launch;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
+/* ===== VÍCE RAKET ===== */
+.rocket{
+  position:fixed;
+  bottom:-120px;
+  font-size:42px;
+  opacity:0.85;
+  animation: launch linear infinite;
+  z-index:10;
+}
 
-  /* pozice + rychlosti + zpoždění */
-  .r1{ left: 6%;  animation-duration:10s; animation-delay:0s;  }
-  .r2{ left: 18%; animation-duration:14s; animation-delay:2s;  }
-  .r3{ left: 38%; animation-duration:12s; animation-delay:1s;  }
-  .r4{ left: 56%; animation-duration:16s; animation-delay:4s;  }
-  .r5{ left: 74%; animation-duration:11s; animation-delay:3s;  }
-  .r6{ left: 90%; animation-duration:13s; animation-delay:5s;  }
+.r1{left:8%;  animation-duration:10s;}
+.r2{left:22%; animation-duration:14s;}
+.r3{left:40%; animation-duration:12s;}
+.r4{left:60%; animation-duration:16s;}
+.r5{left:78%; animation-duration:11s;}
 
-  @keyframes launch{
-    0%   { transform: translateY(0) rotate(-8deg); opacity:0; }
-    10%  { opacity:.9; }
-    100% { transform: translateY(-140vh) rotate(6deg); opacity:0; }
-  }
+@keyframes launch{
+  0%{transform:translateY(0); opacity:0;}
+  10%{opacity:1;}
+  100%{transform:translateY(-140vh); opacity:0;}
+}
 
-  /* ===== LAYOUT ===== */
-  .page{
-    width:100%;
-    display:flex;
-    justify-content:center;
-  }
+/* ===== LAYOUT ===== */
+.page{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
 
-  .missions{
-    width:100%;
-    max-width:1200px;
-    padding:60px 20px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:40px;
-  }
+.missions{
+  width:100%;
+  max-width:1200px;
+  padding:60px 20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:40px;
+}
 
-  .title{
-    text-align:center;
-    font-size:2.2rem;
-    margin:0 0 10px 0;
-  }
+.title{
+  text-align:center;
+  font-size:2.2rem;
+  margin-bottom:10px;
+}
 
-  .mission{
-    width:100%;
-    max-width:850px;
-    background:#11162a;
-    border-radius:14px;
-    padding:25px;
-    box-shadow:0 0 25px rgba(0,0,0,.5);
-  }
+/* ===== KARTA ===== */
+.mission{
+  width:100%;
+  max-width:850px;
+  background:#11162a;
+  border-radius:14px;
+  padding:25px;
+  box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
 
-  .mission h2{
-    margin:0 0 8px 0;
-    color:#ff4d4d;
-  }
+.mission h2{
+  margin-top:0;
+  color:#ff4d4d;
+}
 
-  .label{
-    font-weight:bold;
-    color:#cbd3ff;
-  }
+.label{
+  font-weight:bold;
+  color:#cbd3ff;
+}
 
-  .date{
-    color:#9aa3ff;
-    margin:0 0 10px 0;
-    line-height:1.4;
-  }
+.date{
+  color:#9aa3ff;
+  margin-bottom:10px;
+  line-height:1.4;
+}
 
-  .desc{
-    margin:0 0 14px 0;
-    line-height:1.5;
-  }
+.desc{
+  line-height:1.5;
+  margin-bottom:15px;
+}
 
-  .mission img{
-    display:block;
-    width:100%;
-    max-height:420px;
-    object-fit:cover;
-    border-radius:10px;
-    margin:12px 0 0 0;
-    background:#0a0e1a;
-  }
-
-  /* malá poznámka dole */
-  .note{
-    color:#aab2d6;
-    font-size:.9rem;
-    text-align:center;
-    max-width:850px;
-    opacity:.9;
-  }
+.mission img{
+  display:block;
+  width:100%;
+  max-height:420px;
+  object-fit:cover;
+  border-radius:10px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- 🚀 rakety -->
+<!-- 🚀 RAKETY -->
 <div class="rocket r1">🚀</div>
 <div class="rocket r2">🚀</div>
 <div class="rocket r3">🚀</div>
 <div class="rocket r4">🚀</div>
 <div class="rocket r5">🚀</div>
-<div class="rocket r6">🚀</div>
 
 <main class="page">
-  <section class="missions">
+<section class="missions">
 
-    <h1 class="title">Přelomové vesmírné mise</h1>
+<h1 class="title">Přelomové vesmírné mise</h1>
 
-    <div class="mission">
-      <h2>Sputnik 1</h2>
-      <p class="label">popis:</p>
-      <p class="date">4. října 1957</p>
-      <p class="desc">První umělá družice země.</p>
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/b/be/Sputnik_asm.jpg"
-        alt="Sputnik 1 (model)"
-        loading="lazy"
-        referrerpolicy="no-referrer"
-      />
-    </div>
+<!-- ===== SPUTNIK 1 ===== -->
+<div class="mission">
+  <h2>Sputnik 1</h2>
+  <p class="label">popis:</p>
+  <p class="date">4. října 1957</p>
+  <p class="desc">První umělá družice Země.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Sputnik_asm.jpg" alt="Sputnik 1">
+</div>
 
-    <div class="mission">
-      <h2>Vostok 1</h2>
-      <p class="label">popis:</p>
-      <p class="date">12. dubna 1961</p>
-      <p class="desc">První člověk ve Vesmíru, Jurij Gagarin.</p>
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Vostok_1_patch.png"
-        alt="Vostok 1 (emise/patch)"
-        loading="lazy"
-        referrerpolicy="no-referrer"
-      />
-    </div>
+<!-- ===== VOSTOK 1 ===== -->
+<div class="mission">
+  <h2>Vostok 1</h2>
+  <p class="label">popis:</p>
+  <p class="date">12. dubna 1961</p>
+  <p class="desc">První člověk ve Vesmíru, Jurij Gagarin.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vostok_1_capsule.jpg" alt="Vostok 1">
+</div>
 
-    <div class="mission">
-      <h2>Voschod 2</h2>
-      <p class="label">popis:</p>
-      <p class="date">18–19. března 1965</p>
-      <p class="desc">První výstup do vesmíru, Alexej Leonov</p>
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/8/86/Leonov_spacewalk.jpg"
-        alt="Alexej Leonov – první EVA"
-        loading="lazy"
-        referrerpolicy="no-referrer"
-      />
-    </div>
+<!-- ===== VOSCHOD 2 ===== -->
+<div class="mission">
+  <h2>Voschod 2</h2>
+  <p class="label">popis:</p>
+  <p class="date">18.–19. března 1965</p>
+  <p class="desc">První výstup do vesmíru, Alexej Leonov.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Leonov_spacewalk.jpg" alt="Leonov EVA">
+</div>
 
-    <div class="mission">
-      <h2>Apollo 8</h2>
-      <p class="label">popis:</p>
-      <p class="date">
-        Start: 21. prosince 1968<br>
-        První lidé u Měsíce. Frank Borman, William Anders a Jim Lovell<br>
-        Přistání zpět na Zemi: 27. prosince 1968
-      </p>
-      <img
-        src="https://science.nasa.gov/wp-content/uploads/2023/06/earthrise_apollo8_as08-14-2383.jpg"
-        alt="Apollo 8 – Earthrise"
-        loading="lazy"
-        referrerpolicy="no-referrer"
-      />
-    </div>
+<!-- ===== APOLLO 8 ===== -->
+<div class="mission">
+  <h2>Apollo 8</h2>
+  <p class="label">popis:</p>
+  <p class="date">
+    Start: 21. prosince 1968<br>
+    První lidé u Měsíce – Frank Borman, William Anders, Jim Lovell<br>
+    Přistání zpět na Zemi: 27. prosince 1968
+  </p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Apollo_8_Earthrise.jpg" alt="Apollo 8 Earthrise">
+</div>
 
-    <div class="mission">
-      <h2>Apollo 11</h2>
-      <p class="label">popis:</p>
-      <p class="date">
-        Start: 16. července 1969<br>
-        Přistání na Měsíci: 20. července 1969<br>
-        Neil Armstrong a Buzz Aldrin<br>
-        Návrat na Zemi: 24. července 1969
-      </p>
-      <img
-        src="https://www.jpl.nasa.gov/images/pia24439-apollo-footprint/PIA24439.jpg"
-        alt="Apollo 11 – otisk boty na Měsíci"
-        loading="lazy"
-        referrerpolicy="no-referrer"
-      />
-    </div>
+<!-- ===== APOLLO 11 ===== -->
+<div class="mission">
+  <h2>Apollo 11</h2>
+  <p class="label">popis:</p>
+  <p class="date">
+    Start: 16. července 1969<br>
+    Přistání na Měsíci: 20. července 1969<br>
+    Neil Armstrong a Buzz Aldrin<br>
+    Návrat na Zemi: 24. července 1969
+  </p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Apollo_11_bootprint.jpg" alt="Apollo 11 otisk">
+</div>
 
-    <p class="note">
-      Když by obrázky nešly (škola/bez internetu): stáhni je a dej do stejné složky jako vesmir.html,
-      pak v <code>src</code> změň adresy třeba na <code>img/sputnik.jpg</code>.
-    </p>
-
-  </section>
+</section>
 </main>
 
 </body>
