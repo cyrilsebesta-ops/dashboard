@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<title>Přelomové vesmírné mise</title>
+<title>Vesmírná kalkulačka</title>
 
 <style>
 *{box-sizing:border-box;}
@@ -12,29 +12,6 @@ body{
   font-family:Arial, sans-serif;
   background:#0b0f1a;
   color:white;
-  overflow-x:hidden;
-}
-
-/* ===== VÍCE RAKET ===== */
-.rocket{
-  position:fixed;
-  bottom:-120px;
-  font-size:42px;
-  opacity:0.85;
-  animation: launch linear infinite;
-  z-index:10;
-}
-
-.r1{left:8%;  animation-duration:10s;}
-.r2{left:22%; animation-duration:14s;}
-.r3{left:40%; animation-duration:12s;}
-.r4{left:60%; animation-duration:16s;}
-.r5{left:78%; animation-duration:11s;}
-
-@keyframes launch{
-  0%{transform:translateY(0); opacity:0;}
-  10%{opacity:1;}
-  100%{transform:translateY(-140vh); opacity:0;}
 }
 
 /* ===== LAYOUT ===== */
@@ -44,131 +21,169 @@ body{
   justify-content:center;
 }
 
-.missions{
+.wrap{
   width:100%;
   max-width:1200px;
-  padding:60px 20px;
+  padding:40px 20px;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  gap:40px;
+  gap:30px;
 }
 
-.title{
+h1{
   text-align:center;
-  font-size:2.2rem;
-  margin-bottom:10px;
+  margin:0 0 10px 0;
 }
 
-/* ===== KARTA ===== */
-.mission{
-  width:100%;
-  max-width:850px;
+/* ===== KARTY ===== */
+.card{
   background:#11162a;
   border-radius:14px;
-  padding:25px;
+  padding:20px;
   box-shadow:0 0 25px rgba(0,0,0,0.5);
 }
 
-.mission h2{
+.card h2{
   margin-top:0;
   color:#ff4d4d;
 }
 
-.label{
+/* ===== OBRÁZKY ===== */
+.card img{
+  width:100%;
+  max-height:260px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+/* ===== FORM ===== */
+.row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:10px 0;
+  align-items:center;
+}
+
+label{
+  min-width:160px;
   font-weight:bold;
   color:#cbd3ff;
 }
 
-.date{
-  color:#9aa3ff;
-  margin-bottom:10px;
-  line-height:1.4;
-}
-
-.desc{
-  line-height:1.5;
-  margin-bottom:15px;
-}
-
-.mission img{
-  display:block;
-  width:100%;
-  max-height:420px;
-  object-fit:cover;
+input, select{
+  flex:1;
+  min-width:180px;
+  padding:10px;
   border-radius:10px;
+  border:1px solid rgba(255,255,255,0.15);
+  background:#0b1022;
+  color:white;
+}
+
+button{
+  padding:10px 14px;
+  border-radius:10px;
+  border:none;
+  background:#2b6cff;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.result{
+  background:#0b1022;
+  border-radius:10px;
+  padding:12px;
+  margin-top:10px;
+  line-height:1.5;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🚀 RAKETY -->
-<div class="rocket r1">🚀</div>
-<div class="rocket r2">🚀</div>
-<div class="rocket r3">🚀</div>
-<div class="rocket r4">🚀</div>
-<div class="rocket r5">🚀</div>
-
 <main class="page">
-<section class="missions">
+<section class="wrap">
 
-<h1 class="title">Přelomové vesmírné mise</h1>
+<h1>Vesmírná kalkulačka</h1>
 
-<!-- ===== SPUTNIK 1 ===== -->
-<div class="mission">
-  <h2>Sputnik 1</h2>
-  <p class="label">popis:</p>
-  <p class="date">4. října 1957</p>
-  <p class="desc">První umělá družice Země.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Sputnik_asm.jpg" alt="Sputnik 1">
+<!-- ===== HMOTNOST NA PLANETÁCH ===== -->
+<div class="card">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Solar_sys8.jpg" alt="Sluneční soustava">
+  <h2>Hmotnost na planetách</h2>
+
+  <div class="row">
+    <label>Hmotnost (kg)</label>
+    <input id="mass" type="number" placeholder="např. 70">
+  </div>
+
+  <div class="row">
+    <label>Planeta / těleso</label>
+    <select id="planet">
+      <option value="0.38">Merkur</option>
+      <option value="0.91">Venuše</option>
+      <option value="1">Země</option>
+      <option value="0.165">Měsíc</option>
+      <option value="0.38">Mars</option>
+      <option value="2.53">Jupiter</option>
+      <option value="1.07">Saturn</option>
+      <option value="0.89">Uran</option>
+      <option value="1.14">Neptun</option>
+    </select>
+  </div>
+
+  <button onclick="calcWeight()">Spočítat</button>
+
+  <div class="result" id="outWeight">Zadej údaje.</div>
 </div>
 
-<!-- ===== VOSTOK 1 ===== -->
-<div class="mission">
-  <h2>Vostok 1</h2>
-  <p class="label">popis:</p>
-  <p class="date">12. dubna 1961</p>
-  <p class="desc">První člověk ve Vesmíru, Jurij Gagarin.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vostok_1_capsule.jpg" alt="Vostok 1">
-</div>
+<!-- ===== RYCHLOST SVĚTLA ===== -->
+<div class="card">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Interplanetary_distances.jpg" alt="Vzdálenosti ve vesmíru">
+  <h2>Doba letu signálu (rychlost světla)</h2>
 
-<!-- ===== VOSCHOD 2 ===== -->
-<div class="mission">
-  <h2>Voschod 2</h2>
-  <p class="label">popis:</p>
-  <p class="date">18.–19. března 1965</p>
-  <p class="desc">První výstup do vesmíru, Alexej Leonov.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Leonov_spacewalk.jpg" alt="Leonov EVA">
-</div>
+  <div class="row">
+    <label>Vzdálenost (mil. km)</label>
+    <input id="dist" type="number" placeholder="např. 384">
+  </div>
 
-<!-- ===== APOLLO 8 ===== -->
-<div class="mission">
-  <h2>Apollo 8</h2>
-  <p class="label">popis:</p>
-  <p class="date">
-    Start: 21. prosince 1968<br>
-    První lidé u Měsíce – Frank Borman, William Anders, Jim Lovell<br>
-    Přistání zpět na Zemi: 27. prosince 1968
-  </p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Apollo_8_Earthrise.jpg" alt="Apollo 8 Earthrise">
-</div>
+  <button onclick="calcSignal()">Spočítat</button>
 
-<!-- ===== APOLLO 11 ===== -->
-<div class="mission">
-  <h2>Apollo 11</h2>
-  <p class="label">popis:</p>
-  <p class="date">
-    Start: 16. července 1969<br>
-    Přistání na Měsíci: 20. července 1969<br>
-    Neil Armstrong a Buzz Aldrin<br>
-    Návrat na Zemi: 24. července 1969
-  </p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Apollo_11_bootprint.jpg" alt="Apollo 11 otisk">
+  <div class="result" id="outSignal">Zadej vzdálenost.</div>
 </div>
 
 </section>
 </main>
+
+<script>
+function calcWeight(){
+  const m = document.getElementById("mass").value;
+  const g = document.getElementById("planet").value;
+  if(m <= 0){
+    document.getElementById("outWeight").innerText = "Zadej platnou hmotnost.";
+    return;
+  }
+  const result = (m * g).toFixed(1);
+  document.getElementById("outWeight").innerHTML =
+    `Na zvoleném tělese by tvoje „váha“ byla přibližně <b>${result} kg</b>.`;
+}
+
+function calcSignal(){
+  const d = document.getElementById("dist").value * 1e6; // mil. km → km
+  if(d <= 0){
+    document.getElementById("outSignal").innerText = "Zadej platnou vzdálenost.";
+    return;
+  }
+  const c = 299792; // km/s
+  const seconds = d / c;
+  const minutes = (seconds / 60).toFixed(2);
+
+  document.getElementById("outSignal").innerHTML =
+    `Signál by letěl přibližně <b>${minutes} minut</b>.`;
+}
+</script>
 
 </body>
 </html>
