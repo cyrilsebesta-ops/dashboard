@@ -5,73 +5,98 @@
 <title>Přelomové vesmírné mise</title>
 
 <style>
-/* ===== ZÁKLAD ===== */
 *{
-  box-sizing: border-box;
+  box-sizing:border-box;
 }
 
 body{
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b0f1a;
-  color: white;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0b0f1a;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* ===== LETÍCÍ RAKETA ===== */
+.rocket{
+  position:fixed;
+  bottom:-120px;
+  right:40px;
+  font-size:60px;
+  animation: launch 12s linear infinite;
+  z-index:10;
+}
+
+@keyframes launch{
+  0%   { transform: translateY(0); opacity:0; }
+  10%  { opacity:1; }
+  100% { transform: translateY(-130vh); opacity:0; }
 }
 
 /* ===== STRÁNKA ===== */
 .page{
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  width:100%;
+  display:flex;
+  justify-content:center;
 }
 
 /* ===== KONTEJNER ===== */
 .missions{
-  width: 100%;
-  max-width: 1200px;
-  padding: 40px 20px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
+  width:100%;
+  max-width:1200px;
+  padding:60px 20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:40px;
 }
 
 /* ===== NADPIS ===== */
 .title{
-  font-size: 2rem;
-  margin-bottom: 10px;
-  text-align: center;
+  font-size:2.2rem;
+  text-align:center;
+  margin-bottom:20px;
 }
 
-/* ===== KARTA MISE ===== */
+/* ===== KARTA ===== */
 .mission{
-  width: 100%;
-  max-width: 850px;
-  background: #11162a;
-  border-radius: 14px;
-  padding: 25px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  width:100%;
+  max-width:850px;
+  background:#11162a;
+  border-radius:14px;
+  padding:25px;
+  box-shadow:0 0 25px rgba(0,0,0,0.5);
 }
 
-/* ===== TEXT ===== */
 .mission h2{
-  margin-top: 0;
-  color: #ff4d4d;
+  margin-top:0;
+  color:#ff4d4d;
 }
 
 .date{
-  color: #9aa3ff;
-  font-size: 0.95rem;
-  margin-bottom: 10px;
+  color:#9aa3ff;
+  font-size:0.95rem;
+  margin-bottom:10px;
 }
 
 .desc{
-  line-height: 1.5;
+  line-height:1.5;
+}
+
+/* ===== OBRÁZKY ===== */
+.mission img{
+  display:block;
+  margin:15px auto;
+  max-width:100%;
+  border-radius:8px;
 }
 </style>
 </head>
 
 <body>
+
+<!-- 🚀 RAKETA -->
+<div class="rocket">🚀</div>
 
 <main class="page">
   <section class="missions">
@@ -81,36 +106,34 @@ body{
     <div class="mission">
       <h2>Sputnik 1</h2>
       <p class="date">4. října 1957</p>
-      <p class="desc">
-        První umělá družice Země.
-      </p>
+      <p class="desc">První umělá družice Země.</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Sputnik_asm.jpg">
     </div>
 
     <div class="mission">
       <h2>Vostok 1</h2>
       <p class="date">12. dubna 1961</p>
-      <p class="desc">
-        První člověk ve vesmíru – Jurij Gagarin.
-      </p>
+      <p class="desc">První člověk ve vesmíru – Jurij Gagarin.</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Vostok_1_patch.png">
     </div>
 
     <div class="mission">
       <h2>Voschod 2</h2>
       <p class="date">18.–19. března 1965</p>
-      <p class="desc">
-        První výstup člověka do volného vesmíru – Alexej Leonov.
-      </p>
+      <p class="desc">První výstup do volného vesmíru – Alexej Leonov.</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Leonov_spacewalk.jpg">
     </div>
 
     <div class="mission">
       <h2>Apollo 8</h2>
       <p class="date">
         Start: 21. prosince 1968<br>
-        Návrat na Zemi: 27. prosince 1968
+        Návrat: 27. prosince 1968
       </p>
       <p class="desc">
         První lidé u Měsíce – Frank Borman, William Anders a Jim Lovell.
       </p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Apollo_8_Earthrise.jpg">
     </div>
 
     <div class="mission">
@@ -118,11 +141,12 @@ body{
       <p class="date">
         Start: 16. července 1969<br>
         Přistání na Měsíci: 20. července 1969<br>
-        Návrat na Zemi: 24. července 1969
+        Návrat: 24. července 1969
       </p>
       <p class="desc">
-        První lidé na Měsíci – Neil Armstrong a Buzz Aldrin.
+        Neil Armstrong a Buzz Aldrin – první lidé na Měsíci.
       </p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Apollo_11_bootprint.jpg">
     </div>
 
   </section>
