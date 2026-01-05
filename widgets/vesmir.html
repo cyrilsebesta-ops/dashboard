@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Přelomové vesmírné mise</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    body{margin:0;font-family:sans-serif;}
+    #space{
+      background:#0b1020;
+      color:#fff;
+      padding:14px;
+      border-radius:12px;
+      width:300px;
+      overflow:hidden;
+      position:relative;
+    }
+    button{
+      width:100%;
+      margin-top:8px;
+      border:0;
+      border-radius:6px;
+      padding:6px;
+      cursor:pointer;
+    }
+    #photo{
+      width:100%;
+      border-radius:8px;
+      box-shadow:0 0 10px #000;
+      margin-top:6px;
+      transition: opacity 0.5s;
+    }
+    .fade{opacity:0.3}
+    @keyframes starBlink{
+      0%,100%{opacity:1}
+      50%{opacity:0.2}
+    }
+    .star{
+      position:absolute;
+      background:white;
+      border-radius:50%;
+      width:2px;
+      height:2px;
+      animation:starBlink 2s infinite;
+    }
+  </style>
+</head>
+<body>
+
+<div id="space" x-data="spaceWidget()" x-init="init()">
+  <h3>🚀 Přelomové mise</h3>
+
+  <p x-html="text" :class="{fade}"></p>
+  <img :src="photo" alt="Mise foto" :class="{fade}" id="photo">
+
+  <button @click="next()">Další mise</button>
+  <div id="stars"></div>
+</div>
+
+<script>
+function spaceWidget(){
+  return{
+    missions:[
+      ["Sputnik 1","4. 10. 1957","První umělá družice Země 🛰️","https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Sputnik_1.jpg/220px-Sputnik_1.jpg","SSSR"],
+      ["Vostok 1","12. 4. 1961","První člověk ve vesmíru – Jurij Gagarin 👨‍🚀","https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2011/03/the_vostok_1_launcher_rollout/9847399-3-eng-GB/The_Vostok_1_launcher_rollout_article.jpg","SSSR"],
+      ["Voschod 2","18.–19. 3. 1965","První výstup do vesmíru – Alexej Leonov 🧑‍🚀","https://cdn.britannica.com/40/149340-050-7B90ACEA/stills-Aleksey-Leonov-movie-camera-spacecraft-Voskhod-March-18-1965.jpg","SSSR"],
+      ["Apollo 8","21.–27. 12. 1968","První lidé u Měsíce 🌕<br>Frank Borman, William Anders, Jim Lovell","https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Apollo_8_Earthrise.jpg/220px-Apollo_8_Earthrise.jpg","USA"],
+      ["Apollo 11","16.–24. 7. 1969","První přistání na Měsíci 🌑<br>Neil Armstrong, Buzz Aldrin","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUi4OyozbsB8for1LiKEe22dqUMin003eayA&s","USA"]
+    ],
+    text:"",
+    photo:"",
+    fade:false,
+
+    next(){
+      this.fade=true;
+      setTimeout(()=>{
+        const m=this.missions[Math.floor(Math.random()*this.missions.length)];
+        this.text=`<b style="color:${m[4]==='USA'?'#5fd3ff':'#ff6b6b'}">${m[0]}</b><br>${m[1]}<br>${m[2]}`;
+        this.photo=m[3];
+        this.fade=false;
+      },300);
+    },
+
+    init(){
+      const stars=document.getElementById('stars');
+      for(let i=0;i<60;i++){
+        const s=document.createElement('div');
+        s.className='star';
+        s.style.top=Math.random()*300+'px';
+        s.style.left=Math.random()*300+'px';
+        s.style.animationDuration=(1+Math.random()*2)+'s';
+        stars.appendChild(s);
+      }
+      this.next();
+    }
+  }
+}
+</script>
+
+</body>
+</html>
