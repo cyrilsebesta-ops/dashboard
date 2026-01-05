@@ -1,183 +1,214 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Přelomové vesmírné mise</title>
 
 <style>
-*{box-sizing:border-box;}
+  *{ box-sizing:border-box; }
 
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0b0f1a;
-  color:white;
-  overflow-x:hidden;
-}
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#0b0f1a;
+    color:#fff;
+    overflow-x:hidden;
+  }
 
-/* ===== VÍCE RAKET ===== */
-.rocket{
-  position:fixed;
-  bottom:-100px;
-  font-size:48px;
-  animation: launch linear infinite;
-  opacity:0.8;
-}
+  /* ===== VÍCE RAKET ===== */
+  .rocket{
+    position:fixed;
+    bottom:-120px;
+    font-size:44px;
+    opacity:.85;
+    z-index:10;
+    animation-name: launch;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
 
-.r1{left:10%; animation-duration:10s;}
-.r2{left:45%; animation-duration:14s;}
-.r3{left:80%; animation-duration:12s;}
+  /* pozice + rychlosti + zpoždění */
+  .r1{ left: 6%;  animation-duration:10s; animation-delay:0s;  }
+  .r2{ left: 18%; animation-duration:14s; animation-delay:2s;  }
+  .r3{ left: 38%; animation-duration:12s; animation-delay:1s;  }
+  .r4{ left: 56%; animation-duration:16s; animation-delay:4s;  }
+  .r5{ left: 74%; animation-duration:11s; animation-delay:3s;  }
+  .r6{ left: 90%; animation-duration:13s; animation-delay:5s;  }
 
-@keyframes launch{
-  0%{transform:translateY(0); opacity:0;}
-  10%{opacity:1;}
-  100%{transform:translateY(-130vh); opacity:0;}
-}
+  @keyframes launch{
+    0%   { transform: translateY(0) rotate(-8deg); opacity:0; }
+    10%  { opacity:.9; }
+    100% { transform: translateY(-140vh) rotate(6deg); opacity:0; }
+  }
 
-/* ===== STRÁNKA ===== */
-.page{
-  width:100%;
-  display:flex;
-  justify-content:center;
-}
+  /* ===== LAYOUT ===== */
+  .page{
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
 
-.missions{
-  width:100%;
-  max-width:1200px;
-  padding:60px 20px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:40px;
-}
+  .missions{
+    width:100%;
+    max-width:1200px;
+    padding:60px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+  }
 
-.title{
-  font-size:2.2rem;
-  text-align:center;
-  margin-bottom:20px;
-}
+  .title{
+    text-align:center;
+    font-size:2.2rem;
+    margin:0 0 10px 0;
+  }
 
-/* ===== KARTA ===== */
-.mission{
-  width:100%;
-  max-width:850px;
-  background:#11162a;
-  border-radius:14px;
-  padding:25px;
-  box-shadow:0 0 25px rgba(0,0,0,0.5);
-}
+  .mission{
+    width:100%;
+    max-width:850px;
+    background:#11162a;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 0 25px rgba(0,0,0,.5);
+  }
 
-.mission h2{
-  margin-top:0;
-  color:#ff4d4d;
-}
+  .mission h2{
+    margin:0 0 8px 0;
+    color:#ff4d4d;
+  }
 
-.date{
-  color:#9aa3ff;
-  font-size:0.95rem;
-  margin-bottom:10px;
-}
+  .label{
+    font-weight:bold;
+    color:#cbd3ff;
+  }
 
-.desc{
-  line-height:1.5;
-}
+  .date{
+    color:#9aa3ff;
+    margin:0 0 10px 0;
+    line-height:1.4;
+  }
 
-/* ===== SVG OBRÁZKY ===== */
-.mission svg{
-  display:block;
-  margin:15px auto;
-  width:100%;
-  max-width:500px;
-  border-radius:8px;
-  background:#1a2040;
-}
+  .desc{
+    margin:0 0 14px 0;
+    line-height:1.5;
+  }
+
+  .mission img{
+    display:block;
+    width:100%;
+    max-height:420px;
+    object-fit:cover;
+    border-radius:10px;
+    margin:12px 0 0 0;
+    background:#0a0e1a;
+  }
+
+  /* malá poznámka dole */
+  .note{
+    color:#aab2d6;
+    font-size:.9rem;
+    text-align:center;
+    max-width:850px;
+    opacity:.9;
+  }
 </style>
 </head>
 
 <body>
 
-<!-- 🚀 RAKETY -->
+<!-- 🚀 rakety -->
 <div class="rocket r1">🚀</div>
 <div class="rocket r2">🚀</div>
 <div class="rocket r3">🚀</div>
+<div class="rocket r4">🚀</div>
+<div class="rocket r5">🚀</div>
+<div class="rocket r6">🚀</div>
 
 <main class="page">
-<section class="missions">
+  <section class="missions">
 
-<h1 class="title">Přelomové vesmírné mise</h1>
+    <h1 class="title">Přelomové vesmírné mise</h1>
 
-<div class="mission">
-<h2>Sputnik 1</h2>
-<p class="date">4. října 1957</p>
-<p class="desc">První umělá družice Země.</p>
+    <div class="mission">
+      <h2>Sputnik 1</h2>
+      <p class="label">popis:</p>
+      <p class="date">4. října 1957</p>
+      <p class="desc">První umělá družice země.</p>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/b/be/Sputnik_asm.jpg"
+        alt="Sputnik 1 (model)"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      />
+    </div>
 
-<svg viewBox="0 0 500 200">
-<text x="50%" y="50%" fill="white" font-size="24" text-anchor="middle">
-Sputnik 1
-</text>
-</svg>
-</div>
+    <div class="mission">
+      <h2>Vostok 1</h2>
+      <p class="label">popis:</p>
+      <p class="date">12. dubna 1961</p>
+      <p class="desc">První člověk ve Vesmíru, Jurij Gagarin.</p>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Vostok_1_patch.png"
+        alt="Vostok 1 (emise/patch)"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      />
+    </div>
 
-<div class="mission">
-<h2>Vostok 1</h2>
-<p class="date">12. dubna 1961</p>
-<p class="desc">První člověk ve vesmíru – Jurij Gagarin.</p>
+    <div class="mission">
+      <h2>Voschod 2</h2>
+      <p class="label">popis:</p>
+      <p class="date">18–19. března 1965</p>
+      <p class="desc">První výstup do vesmíru, Alexej Leonov</p>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/8/86/Leonov_spacewalk.jpg"
+        alt="Alexej Leonov – první EVA"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      />
+    </div>
 
-<svg viewBox="0 0 500 200">
-<text x="50%" y="50%" fill="white" font-size="24" text-anchor="middle">
-Vostok 1
-</text>
-</svg>
-</div>
+    <div class="mission">
+      <h2>Apollo 8</h2>
+      <p class="label">popis:</p>
+      <p class="date">
+        Start: 21. prosince 1968<br>
+        První lidé u Měsíce. Frank Borman, William Anders a Jim Lovell<br>
+        Přistání zpět na Zemi: 27. prosince 1968
+      </p>
+      <img
+        src="https://science.nasa.gov/wp-content/uploads/2023/06/earthrise_apollo8_as08-14-2383.jpg"
+        alt="Apollo 8 – Earthrise"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      />
+    </div>
 
-<div class="mission">
-<h2>Voschod 2</h2>
-<p class="date">18.–19. března 1965</p>
-<p class="desc">První výstup do vesmíru – Alexej Leonov.</p>
+    <div class="mission">
+      <h2>Apollo 11</h2>
+      <p class="label">popis:</p>
+      <p class="date">
+        Start: 16. července 1969<br>
+        Přistání na Měsíci: 20. července 1969<br>
+        Neil Armstrong a Buzz Aldrin<br>
+        Návrat na Zemi: 24. července 1969
+      </p>
+      <img
+        src="https://www.jpl.nasa.gov/images/pia24439-apollo-footprint/PIA24439.jpg"
+        alt="Apollo 11 – otisk boty na Měsíci"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      />
+    </div>
 
-<svg viewBox="0 0 500 200">
-<text x="50%" y="50%" fill="white" font-size="24" text-anchor="middle">
-EVA Leonov
-</text>
-</svg>
-</div>
+    <p class="note">
+      Když by obrázky nešly (škola/bez internetu): stáhni je a dej do stejné složky jako vesmir.html,
+      pak v <code>src</code> změň adresy třeba na <code>img/sputnik.jpg</code>.
+    </p>
 
-<div class="mission">
-<h2>Apollo 8</h2>
-<p class="date">
-Start: 21. prosince 1968<br>
-Návrat: 27. prosince 1968
-</p>
-<p class="desc">
-První lidé u Měsíce – Borman, Anders, Lovell.
-</p>
-
-<svg viewBox="0 0 500 200">
-<text x="50%" y="50%" fill="white" font-size="24" text-anchor="middle">
-Apollo 8
-</text>
-</svg>
-</div>
-
-<div class="mission">
-<h2>Apollo 11</h2>
-<p class="date">
-Start: 16. července 1969<br>
-Přistání: 20. července 1969<br>
-Návrat: 24. července 1969
-</p>
-<p class="desc">
-Neil Armstrong a Buzz Aldrin – první lidé na Měsíci.
-</p>
-
-<svg viewBox="0 0 500 200">
-<text x="50%" y="50%" fill="white" font-size="24" text-anchor="middle">
-Apollo 11
-</text>
-</svg>
-</div>
-
-</section>
+  </section>
 </main>
 
 </body>
