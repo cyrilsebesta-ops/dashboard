@@ -1,189 +1,192 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
-<meta charset="UTF-8">
-<title>Vesmírná kalkulačka</title>
+  <meta charset="UTF-8">
+  <title>Vesmírná kalkulačka</title>
 
-<style>
-*{box-sizing:border-box;}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0b0f1a;
-  color:white;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f1a;
+      color: white;
+    }
 
-/* ===== LAYOUT ===== */
-.page{
-  width:100%;
-  display:flex;
-  justify-content:center;
-}
+    /* ===== LAYOUT ===== */
+    .page {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
 
-.wrap{
-  width:100%;
-  max-width:1200px;
-  padding:40px 20px;
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-}
+    .wrap {
+      width: 100%;
+      max-width: 1200px;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
 
-h1{
-  text-align:center;
-  margin:0 0 10px 0;
-}
+    h1 {
+      text-align: center;
+      margin: 0 0 10px 0;
+    }
 
-/* ===== KARTY ===== */
-.card{
-  background:#11162a;
-  border-radius:14px;
-  padding:20px;
-  box-shadow:0 0 25px rgba(0,0,0,0.5);
-}
+    /* ===== KARTY ===== */
+    .card {
+      background: #11162a;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    }
 
-.card h2{
-  margin-top:0;
-  color:#ff4d4d;
-}
+    .card h2 {
+      margin-top: 0;
+      color: #ff4d4d;
+    }
 
-/* ===== OBRÁZKY ===== */
-.card img{
-  width:100%;
-  max-height:260px;
-  object-fit:cover;
-  border-radius:10px;
-  margin-bottom:15px;
-}
+    /* ===== OBRÁZKY ===== */
+    .card img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
 
-/* ===== FORM ===== */
-.row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin:10px 0;
-  align-items:center;
-}
+    /* ===== FORM ===== */
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0;
+      align-items: center;
+    }
 
-label{
-  min-width:160px;
-  font-weight:bold;
-  color:#cbd3ff;
-}
+    label {
+      min-width: 160px;
+      font-weight: bold;
+      color: #cbd3ff;
+    }
 
-input, select{
-  flex:1;
-  min-width:180px;
-  padding:10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.15);
-  background:#0b1022;
-  color:white;
-}
+    input,
+    select {
+      flex: 1;
+      min-width: 180px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #0b1022;
+      color: white;
+    }
 
-button{
-  padding:10px 14px;
-  border-radius:10px;
-  border:none;
-  background:#2b6cff;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
+    button {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      background: #2b6cff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.result{
-  background:#0b1022;
-  border-radius:10px;
-  padding:12px;
-  margin-top:10px;
-  line-height:1.5;
-}
-</style>
+    .result {
+      background: #0b1022;
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 
 <body>
 
-<main class="page">
-<section class="wrap">
+  <main class="page">
+    <section class="wrap">
 
-<h1>Vesmírná kalkulačka</h1>
+      <h1>Vesmírná kalkulačka</h1>
 
-<!-- ===== HMOTNOST NA PLANETÁCH ===== -->
-<div class="card">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Solar_sys8.jpg" alt="Sluneční soustava">
-  <h2>Hmotnost na planetách</h2>
+      <!-- ===== HMOTNOST NA PLANETÁCH ===== -->
+      <div class="card">
+        <h2>Hmotnost na planetách</h2>
 
-  <div class="row">
-    <label>Hmotnost (kg)</label>
-    <input id="mass" type="number" placeholder="např. 70">
-  </div>
+        <div class="row">
+          <label>Hmotnost (kg)</label>
+          <input id="mass" type="number" placeholder="např. 70">
+        </div>
 
-  <div class="row">
-    <label>Planeta / těleso</label>
-    <select id="planet">
-      <option value="0.38">Merkur</option>
-      <option value="0.91">Venuše</option>
-      <option value="1">Země</option>
-      <option value="0.165">Měsíc</option>
-      <option value="0.38">Mars</option>
-      <option value="2.53">Jupiter</option>
-      <option value="1.07">Saturn</option>
-      <option value="0.89">Uran</option>
-      <option value="1.14">Neptun</option>
-    </select>
-  </div>
+        <div class="row">
+          <label>Planeta / těleso</label>
+          <select id="planet">
+            <option value="0.38">Merkur</option>
+            <option value="0.91">Venuše</option>
+            <option value="1">Země</option>
+            <option value="0.165">Měsíc</option>
+            <option value="0.38">Mars</option>
+            <option value="2.53">Jupiter</option>
+            <option value="1.07">Saturn</option>
+            <option value="0.89">Uran</option>
+            <option value="1.14">Neptun</option>
+          </select>
+        </div>
 
-  <button onclick="calcWeight()">Spočítat</button>
+        <button onclick="calcWeight()">Spočítat</button>
 
-  <div class="result" id="outWeight">Zadej údaje.</div>
-</div>
+        <div class="result" id="outWeight">Zadej údaje.</div>
+      </div>
 
-<!-- ===== RYCHLOST SVĚTLA ===== -->
-<div class="card">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Interplanetary_distances.jpg" alt="Vzdálenosti ve vesmíru">
-  <h2>Doba letu signálu (rychlost světla)</h2>
+      <!-- ===== RYCHLOST SVĚTLA ===== -->
+      <div class="card">
+        <h2>Doba letu signálu (rychlost světla)</h2>
 
-  <div class="row">
-    <label>Vzdálenost (mil. km)</label>
-    <input id="dist" type="number" placeholder="např. 384">
-  </div>
+        <div class="row">
+          <label>Vzdálenost (mil. km)</label>
+          <input id="dist" type="number" placeholder="např. 384">
+        </div>
 
-  <button onclick="calcSignal()">Spočítat</button>
+        <button onclick="calcSignal()">Spočítat</button>
 
-  <div class="result" id="outSignal">Zadej vzdálenost.</div>
-</div>
+        <div class="result" id="outSignal">Zadej vzdálenost.</div>
+      </div>
 
-</section>
-</main>
+    </section>
+  </main>
 
-<script>
-function calcWeight(){
-  const m = document.getElementById("mass").value;
-  const g = document.getElementById("planet").value;
-  if(m <= 0){
-    document.getElementById("outWeight").innerText = "Zadej platnou hmotnost.";
-    return;
-  }
-  const result = (m * g).toFixed(1);
-  document.getElementById("outWeight").innerHTML =
-    `Na zvoleném tělese by tvoje „váha“ byla přibližně <b>${result} kg</b>.`;
-}
+  <script>
+    function calcWeight() {
+      const m = document.getElementById("mass").value;
+      const g = document.getElementById("planet").value;
+      if (m <= 0) {
+        document.getElementById("outWeight").innerText = "Zadej platnou hmotnost.";
+        return;
+      }
+      const result = (m * g).toFixed(1);
+      document.getElementById("outWeight").innerHTML =
+        `Na zvoleném tělese by tvoje „váha“ byla přibližně <b>${result} kg</b>.`;
+    }
 
-function calcSignal(){
-  const d = document.getElementById("dist").value * 1e6; // mil. km → km
-  if(d <= 0){
-    document.getElementById("outSignal").innerText = "Zadej platnou vzdálenost.";
-    return;
-  }
-  const c = 299792; // km/s
-  const seconds = d / c;
-  const minutes = (seconds / 60).toFixed(2);
+    function calcSignal() {
+      const d = document.getElementById("dist").value * 1e6; // mil. km → km
+      if (d <= 0) {
+        document.getElementById("outSignal").innerText = "Zadej platnou vzdálenost.";
+        return;
+      }
+      const c = 299792; // km/s
+      const seconds = d / c;
+      const minutes = (seconds / 60).toFixed(2);
 
-  document.getElementById("outSignal").innerHTML =
-    `Signál by letěl přibližně <b>${minutes} minut</b>.`;
-}
-</script>
+      document.getElementById("outSignal").innerHTML =
+        `Signál by letěl přibližně <b>${minutes} minut</b>.`;
+    }
+  </script>
 
 </body>
+
 </html>
