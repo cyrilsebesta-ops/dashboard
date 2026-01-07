@@ -1,0 +1,50 @@
+<div id="mood-widget">
+  <h3>Mood Tracker</h3>
+  <p>Jak se dnes cítíš?</p>
+
+  <input type="date" id="date">
+
+  <div id="moods">
+    <button>😄</button>
+    <button>🙂</button>
+    <button>😐</button>
+    <button>😕</button>
+    <button>😡</button>
+  </div>
+
+  <ul id="history"></ul>
+</div>
+
+<style>
+#mood-widget{padding:10px;border-radius:10px;background:#fff;box-shadow:0 2px 6px #0002;width:220px;font-family:sans-serif}
+#moods button{font-size:20px;margin:3px;cursor:pointer;border:none;background:#eee;border-radius:50%;width:36px;height:36px}
+#moods button.active{background:#4caf50;color:#fff}
+#history{list-style:none;padding:0;margin-top:8px;font-size:13px}
+#history li{display:flex;justify-content:space-between}
+</style>
+
+<script>
+const d=document,s=localStorage,k="moodTracker";
+const date=d.querySelector("#date"),btns=[...d.querySelectorAll("#moods button")],hist=d.querySelector("#history");
+date.value=new Date().toISOString().slice(0,10);
+
+const load=()=>JSON.parse(s.getItem(k)||"{}");
+const save=o=>s.setItem(k,JSON.stringify(o));
+
+function render(){
+  const o=load(),sel=o[date.value];
+  btns.forEach(b=>b.classList.toggle("active",b.textContent===sel));
+  hist.innerHTML="";
+  for(let i=0;i<7;i++){
+    const x=new Date();x.setDate(x.getDate()-i);
+    const ds=x.toISOString().slice(0,10);
+    hist.innerHTML+=`<li>${ds.slice(5)} ${o[ds]||"—"}</li>`;
+  }
+}
+
+btns.forEach(b=>b.onclick=()=>{
+  const o=load();o[date.value]=b.textContent;save(o);render();
+});
+date.onchange=render;
+render();
+</script>
