@@ -1,81 +1,170 @@
-<div id="mood-widget">
-    <h3>Mood Tracker</h3>
-    <p>Jak se dnes cítíš?</p>
+<div class="mt">
+    <div class="mt-top">
+        <div>
+            <h3>Mood Tracker</h3>
+            <p>Jak se dnes cítíš?</p>
+        </div>
 
-    <input type="date" id="date">
-
-    <div id="moods">
-        <button>😄</button>
-        <button>🙂</button>
-        <button>😐</button>
-        <button>😕</button>
-        <button>😡</button>
+        <div class="mt-date">
+            <input type="date" id="mt-date">
+            <button type="button" id="mt-open" title="Vybrat datum">📅</button>
+        </div>
     </div>
 
-    <ul id="history"></ul>
+    <div id="mt-moods" class="mt-moods">
+        <button type="button">😄</button>
+        <button type="button">🙂</button>
+        <button type="button">😐</button>
+        <button type="button">😕</button>
+        <button type="button">😡</button>
+    </div>
+
+    <ul id="mt-history" class="mt-history"></ul>
 </div>
 
 <style>
-    #mood-widget {
-        padding: 10px;
+    /* kompaktní, tmavý, hezký */
+    .mt {
+        color: rgba(255, 255, 255, .92);
+        font-family: inherit;
+    }
+
+    .mt h3 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .mt p {
+        margin: 2px 0 0;
+        font-size: 12px;
+        color: rgba(255, 255, 255, .6);
+    }
+
+    .mt-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .mt-date {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+    }
+
+    #mt-date {
+        width: 140px;
+        height: 34px;
+        padding: 6px 10px;
         border-radius: 10px;
-        background: gray;
-        box-shadow: 0 2px 6px #0002;
-        width: 220px;
-        font-family: sans-serif
+        border: 1px solid rgba(255, 255, 255, .12);
+        background: rgba(0, 0, 0, .25);
+        color: rgba(255, 255, 255, .9);
     }
 
-    #moods button {
-        font-size: 20px;
-        margin: 3px;
+    #mt-open {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, .12);
+        background: rgba(255, 255, 255, .10);
         cursor: pointer;
-        border: none;
-        background: #eee;
-        border-radius: 50%;
-        width: 36px;
-        height: 36px
     }
 
-    #moods button.active {
-        background: #4caf50;
-        color: white
+    #mt-open:hover {
+        background: rgba(255, 255, 255, .16);
     }
 
-    #history {
+    .mt-moods {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 6px 0 12px;
+        flex-wrap: nowrap;
+    }
+
+    .mt-moods button {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, .14);
+        background: rgba(255, 255, 255, .08);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        font-size: 22px;
+        transition: .12s ease;
+    }
+
+    .mt-moods button:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, .14);
+    }
+
+    .mt-moods button.active {
+        background: rgba(59, 130, 246, .22);
+        border-color: rgba(59, 130, 246, .55);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, .18);
+    }
+
+    .mt-history {
         list-style: none;
         padding: 0;
-        margin-top: 8px;
-        font-size: 13px
+        margin: 0;
+        font-size: 12px;
+        color: rgba(255, 255, 255, .75);
+        display: grid;
+        gap: 6px;
     }
 
-    #history li {
+    .mt-history li {
         display: flex;
-        justify-content: space-between
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 8px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, .08);
+        background: rgba(255, 255, 255, .03);
+    }
+
+    .mt-history span {
+        color: rgba(255, 255, 255, .55);
     }
 </style>
 
 <script>
-    const d = document, s = localStorage, k = "moodTracker";
-    const date = d.querySelector("#date"), btns = [...d.querySelectorAll("#moods button")], hist = d.querySelector("#history");
-    date.value = new Date().toISOString().slice(0, 10);
+    (() => {
+        const k = "moodTracker", $ = s => document.querySelector(s);
+        const date = $("#mt-date"), open = $("#mt-open"), moods = [...$("#mt-moods").children], hist = $("#mt-history");
 
-    const load = () => JSON.parse(s.getItem(k) || "{}");
-    const save = o => s.setItem(k, JSON.stringify(o));
+        const iso = d => d.toISOString().slice(0, 10);
+        const today = iso(new Date());
+        date.value = today; date.max = today;
 
-    function render() {
-        const o = load(), sel = o[date.value];
-        btns.forEach(b => b.classList.toggle("active", b.textContent === sel));
-        hist.innerHTML = "";
-        for (let i = 0; i < 7; i++) {
-            const x = new Date(); x.setDate(x.getDate() - i);
-            const ds = x.toISOString().slice(0, 10);
-            hist.innerHTML += `<li>${ds.slice(5)} ${o[ds] || "—"}</li>`;
-        }
-    }
+        const load = () => JSON.parse(localStorage.getItem(k) || "{}");
+        const save = o => localStorage.setItem(k, JSON.stringify(o));
 
-    btns.forEach(b => b.onclick = () => {
-        const o = load(); o[date.value] = b.textContent; save(o); render();
-    });
-    date.onchange = render;
-    render();
+        const render = () => {
+            const o = load(), sel = o[date.value];
+            moods.forEach(b => b.classList.toggle("active", b.textContent === sel));
+            hist.innerHTML = "";
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(); d.setDate(d.getDate() - i);
+                const ds = iso(d);
+                hist.innerHTML += `<li><span>${ds.slice(5).replace("-", ".")}</span><b>${o[ds] || "—"}</b></li>`;
+            }
+        };
+
+        moods.forEach(b => b.onclick = () => {
+            const o = load(); o[date.value] = b.textContent; save(o); render();   // 1 den = 1 nálada (přepis)
+        });
+        date.onchange = render;
+
+        open.onclick = () => date.showPicker ? date.showPicker() : date.focus();
+
+        render();
+    })();
 </script>
