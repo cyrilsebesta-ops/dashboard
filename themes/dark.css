@@ -1,0 +1,10 @@
+:root {
+    --body-bg: #070a12;
+    --panel: rgba(10, 14, 24, .75);
+    --panel2: rgba(18, 24, 40, .78);
+    --border: rgba(255, 255, 255, .10);
+    --text-color: rgba(255, 255, 255, .92);
+    --muted: rgba(255, 255, 255, .62);
+    --radius: 18px;
+    --shadow: 0 16px 40px rgba(0, 0, 0, .55);
+}
