@@ -21,6 +21,12 @@ body {
   margin: 0 auto;
 }
 
+@media (max-width: 1000px) {
+#dashboard.grid {
+  display: block;
+}
+}
+
 .widget {
   background: linear-gradient(180deg, var(--panel2), var(--panel));
   border: 1px solid var(--border);

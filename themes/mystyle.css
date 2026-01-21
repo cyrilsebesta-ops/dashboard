@@ -1,0 +1,9 @@
+:root {
+    --body-bg: #1a1400;
+    --widget-bg: #2a2100;
+    --text-color: #fff3c4;
+    --shadow-color: rgba(255, 200, 80, 0.4);
+    --shadow-hover: rgba(255, 215, 120, 0.7);
+    --primary-color: #ffd24d;
+    --primary-color-text: #1a1400;
+}
